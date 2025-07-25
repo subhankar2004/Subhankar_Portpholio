@@ -26,13 +26,31 @@ const config: Config = {
         serif: "var(--font-serif)",
       },
       animation: {
-        "ping-large": "ping-large 1s ease-in-out infinite",
+        pingLarge: "pingLarge 1s ease-in-out infinite",
+        moveLeft: "moveLeft 10s linear infinite",
+        moveRight: "moveRight 10s linear infinite",
       },
       keyframes: {
-        "ping-large": {
-          "75%,100%": {
+        pingLarge: {
+          "75%, 100%": {
             transform: "scale(3)",
             opacity: "0",
+          },
+        },
+        moveLeft: {
+          "0%": {
+            transform: "translateX(0)",
+          },
+          "100%": {
+            transform: "translateX(-100%)",
+          },
+        },
+        moveRight: {
+          "0%": {
+            transform: "translateX(-100%)",
+          },
+          "100%": {
+            transform: "translateX(0)",
           },
         },
       },
