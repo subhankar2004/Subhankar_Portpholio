@@ -15,13 +15,12 @@ export const ContactSection = () => {
           <div className="flex flex-col md:flex-row gap-8 md:gap-16 items-center">
             <div>
               <h2 className="font-serif text-2xl md:text-3xl">
-                Let's create something amazing together
+                Ready to work together?
               </h2>
               <p className="text-sm md:text-base mt-2">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea
-                dolorem cum quos eaque ab officiis laboriosam facilis?
-                Voluptatibus doloremque laboriosam dolorum, quasi delectus iste
-                porro consectetur omnis tempora, ab corporis?
+                Whether you need a full‑stack web app, a custom feature, or help
+                bringing your idea to life, I’d love to hear from you. Let’s
+                turn your vision into reality.
               </p>
             </div>
             <div>

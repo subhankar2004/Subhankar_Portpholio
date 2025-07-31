@@ -11,8 +11,15 @@ import CssIcon from "@/assets/icons/css3.svg";
 import ReactIcon from "@/assets/icons/react.svg";
 import ChromeIcon from "@/assets/icons/chrome.svg";
 import GithubIcon from "@/assets/icons/github.svg";
+import AWSIcon from "@/assets/icons/AWS.svg";
+import DockerIcon from "@/assets/icons/Docker.svg";
+import MongoIcon from "@/assets/icons/MongoDB.svg";
+import NextIcon from "@/assets/icons/NextJs.svg";
+import NestIcon from "@/assets/icons/NestJs.svg";
+import NodeIcon from "@/assets/icons/NodeJs.svg";
+import SQLIcon from "@/assets/icons/SQL.svg";
 import { motion } from "framer-motion";
-import MapImage from "@/assets/images/map.png";
+import MapImage from "@/assets/images/map1.png";
 import memoji from "@/assets/images/memoji-smile.png";
 import { CardHeader } from "@/components/CardHeader";
 import { ToolboxItems } from "@/components/ToolBoxItems";
@@ -42,6 +49,34 @@ const toolboxItems = [
   {
     title: "GitHub",
     iconType: GithubIcon,
+  },
+  {
+    title: "AWS",
+    iconType: AWSIcon,
+  },
+  {
+    title: "Docker",
+    iconType: DockerIcon,
+  },
+  {
+    title: "MongoDB",
+    iconType: MongoIcon,
+  },
+  {
+    title: "Next.js",
+    iconType: NextIcon,
+  },
+  {
+    title: "Nest.js",
+    iconType: NestIcon,
+  },
+  {
+    title: "Node.js",
+    iconType: NodeIcon,
+  },
+  {
+    title: "SQL",
+    iconType: SQLIcon,
   },
 ];
 
@@ -91,7 +126,7 @@ const hobbies = [
 ];
 
 export const AboutSection = () => {
-  const constraintRef=useRef(null);
+  const constraintRef = useRef(null);
   return (
     <div className="py-20 lg:py-28">
       <div className="container">
@@ -125,12 +160,12 @@ export const AboutSection = () => {
                 <ToolboxItems
                   toolboxItems={toolboxItems}
                   className="mt-3"
-                  itemsWrapperClassName="animate-moveLeft [animation-duration:30s]"
+                  itemsWrapperClassName="animate-moveLeft [animation-duration:60s]"
                 />
                 <ToolboxItems
                   toolboxItems={toolboxItems}
                   className="mt-2"
-                  itemsWrapperClassName="animate-moveRight [animation-duration:30s]"
+                  itemsWrapperClassName="animate-moveRight [animation-duration:60s]"
                 />
               </div>
             </Card>
@@ -144,7 +179,10 @@ export const AboutSection = () => {
                 description="Explore my hobbies beyond the digital world!"
                 className="px-6 pt-6"
               />
-              <div className="relative flex-1 overflow-hidden" ref={constraintRef}>
+              <div
+                className="relative flex-1 overflow-hidden"
+                ref={constraintRef}
+              >
                 {hobbies.map((hobby, index) => (
                   <motion.div
                     key={`${hobby.title}-${index}`}

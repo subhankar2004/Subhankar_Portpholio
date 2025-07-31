@@ -1,3 +1,4 @@
+"use client";
 import memojiImage from "@/assets/images/memoji-computer.png";
 import Image from "next/image";
 import ArrowDown from "@/assets/icons/arrow-down.svg";
@@ -5,8 +6,73 @@ import grainImage from "@/assets/images/grain.jpg";
 import StarIcon from "@/assets/icons/star.svg";
 import { HeroOrbit } from "@/components/HeroOrbit";
 import SparkelIcon from "@/assets/icons/sparkle.svg";
+import ProfileImage from "@/assets/images/profile.jpeg";
+import Download from "@/assets/icons/download.svg";
+
+import { useHideOnScroll } from "@/hooks/useHideOnScroll";
+import { useCallback, useEffect } from "react";
+import { label } from "motion/react-client";
+
+const link = {
+  label: "Projects",
+  id: "projects"
+}
 
 export const HeroSection = () => {
+  const hidden = useHideOnScroll({ threshold: 6, showAt: 40 });
+
+  // Measure the navbar height and add the 12px top gap from `top-3`
+  const getOffset = useCallback(() => {
+    const nav = document.getElementById("site-navbar");
+    const navH = nav?.getBoundingClientRect().height ?? 0;
+    const topGap = 12; // from class `top-3`
+    return navH + topGap;
+  }, []);
+
+  const scrollToId = useCallback(
+    (id: string) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const y = el.getBoundingClientRect().top + window.scrollY - getOffset();
+      window.scrollTo({ top: y, behavior: "smooth" });
+
+      // Update the URL hash without triggering the native jump
+      history.replaceState(null, "", `#${id}`);
+    },
+    [getOffset]
+  );
+
+  // Handle deep links like /#projects on first load
+  useEffect(() => {
+    if (location.hash) {
+      const id = location.hash.slice(1);
+      // Run after layout settles
+      setTimeout(() => scrollToId(id), 0);
+    }
+  }, [scrollToId]);
+
+  // Handle "Explore My Work" button click
+  const handleExploreWork = () => {
+    console.log("Explore My Work clicked!"); // Debug log
+    scrollToId("projects");
+  };
+
+  // Handle resume download
+  const handleDownload = () => {
+    console.log("Download clicked!"); // Debug log
+    // Try window.open first as fallback
+    window.open('/Subhankar_resume.pdf', '_blank');
+    
+    // Also try the programmatic download
+    const link = document.createElement('a');
+    link.href = '/Subhankar_resume.pdf';
+    link.download = 'Subhankar_resume.pdf';
+    link.target = '_blank';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <div className="py-32 md:py-48 lg:py-60 relative z-0 overflow-x-clip">
       <div className="absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent,black_10%,black_70%,transparent)]">
@@ -18,10 +84,7 @@ export const HeroSection = () => {
         <div className="size-[820px] hero-ring"></div>
         <div className="size-[1020px] hero-ring"></div>
         <div className="size-[1220px] hero-ring"></div>
-        {/* shouldOrbit?: boolean;
-          orbitDuration?: string;
-          shouldSpin?: boolean;
-          spinDuration?: string; */}
+        
         <HeroOrbit
           size={430}
           rotation={-14}
@@ -128,23 +191,24 @@ export const HeroSection = () => {
       </div>
       <div className="container">
         <div className="flex flex-col items-center gap-0">
-          {/* <Image
-            src={memojiImage}
-            className="size-[100px] block mx-auto"
-            alt="Person peeking from behind laptop"
-          /> */}
           {/* Wrapper defines the size; children overlap exactly */}
-          <div className="relative w-60 h-36">
-            {/* Pinging layer UNDER; grows upward because origin is bottom */}
+          <div className="relative w-72 h-[160px]">
+            {" "}
+            {/* 288px wide → 150px tall for a larger semicircle */}
             <div
-              aria-hidden="true"
-              className="absolute inset-0 rounded-t-full bg-blue-500
-               origin-bottom animate-pingSmall
-               opacity-60 pointer-events-none z-0"
+              aria-hidden
+              className="absolute inset-0 rounded-t-full bg-emerald-300/20 origin-bottom animate-pingSmall opacity-60 z-0 -translate-y-4"
             />
-
-            {/* Main semicircle on top */}
-            <div className="absolute inset-0 rounded-t-full bg-blue-500 z-10" />
+            <div className="absolute inset-0 z-10 rounded-t-full overflow-hidden">
+              <Image
+                src={ProfileImage}
+                alt="profile_image"
+                fill
+                className="object-cover object-[20%_10%]" // try 55–70% for lower framing
+                sizes="288px"
+                priority
+              />
+            </div>
           </div>
 
           <div className="bg-gray-950 border border-gray-800 px-6 py-2 w-80 rounded-lg inline-flex items-center justify-center gap-4 ">
@@ -158,21 +222,38 @@ export const HeroSection = () => {
         </div>
         <div className="max-w-lg mx-auto">
           <h1 className="font-serif text-3xl md:text-5xl text-center mt-8 tracking-wide">
-            Building Exceptional User Experiences
+            Subhankar Patra 👋 Full‑Stack Developer
           </h1>
           <p className="mt-4 text-center text-white/60 md:text-lg">
-            I specialize in transforming designs into functional,
-            high-performing web applications. Let's discuss your next project.
+            I craft high‑performing web applications using the MERN stack &
+            Next.js, blending clean design with robust engineering. Available
+            for exciting new projects.
           </p>
         </div>
         <div className="flex flex-col md:flex-row justify-center items-center mt-8 gap-4">
-          <button className="inline-flex items-center gap-2 border border-white/15 px-6 h-12">
+          <button 
+            onClick={(e) => {
+              e.preventDefault();
+              console.log("Button 1 clicked!");
+              handleExploreWork();
+            }}
+            type="button"
+            className="inline-flex items-center gap-2 border border-white/15 px-6 h-12 rounded-lg hover:bg-white/5 transition-colors cursor-pointer"
+          >
             <span className="font-semibold">Explore My Work</span>
             <ArrowDown className="size-4" />
           </button>
-          <button className="inline-flex items-center gap-2 border border-white bg-white text-gray-900 px-6 h-12 rounded-xl">
-            <span>👋</span>
-            <span className="font-semibold">Let's Connect</span>
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              console.log("Button 2 clicked!");
+              handleDownload();
+            }}
+            type="button"
+            className="inline-flex items-center gap-2 border border-white bg-white text-gray-900 px-6 h-12 rounded-xl hover:scale-105 active:scale-100 transition-transform cursor-pointer"
+          >
+            <Download className="size-6 text-red-900" />
+            <span className="font-semibold">My Resume</span>
           </button>
         </div>
       </div>

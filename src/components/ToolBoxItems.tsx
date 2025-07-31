@@ -27,12 +27,13 @@ export const ToolboxItems = ({
           itemsWrapperClassName
         )}
       >
-        {[...new Array(2)].fill(0).map((_, index) => (
+        {/* Increase the array size to show more items and create seamless loop */}
+        {[...new Array(3)].fill(0).map((_, index) => (
           <Fragment key={index}>
             {toolboxItems.map((item) => (
               <div
-                key={item.title}
-                className="inline-flex items-center gap-4 py-2 px-3 outline outline-2 outline-white/10 rounded-lg"
+                key={`${item.title}-${index}`}
+                className="inline-flex items-center gap-4 py-2 px-3 outline outline-2 outline-white/10 rounded-lg whitespace-nowrap"
               >
                 <TechIcon component={item.iconType} />
                 <span className="font-semibold">{item.title}</span>
