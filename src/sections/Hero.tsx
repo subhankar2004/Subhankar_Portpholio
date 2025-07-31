@@ -22,51 +22,134 @@ export const HeroSection = () => {
           orbitDuration?: string;
           shouldSpin?: boolean;
           spinDuration?: string; */}
-        <HeroOrbit size={430} rotation={-14} shouldOrbit orbitDuration="30s" shouldSpin spinDuration="7s">
+        <HeroOrbit
+          size={430}
+          rotation={-14}
+          shouldOrbit
+          orbitDuration="30s"
+          shouldSpin
+          spinDuration="7s"
+        >
           <SparkelIcon className="size-8 text-emerald-300/20" />
         </HeroOrbit>
-        <HeroOrbit size={440} rotation={80} shouldOrbit orbitDuration="32s" shouldSpin spinDuration="7s">
+        <HeroOrbit
+          size={440}
+          rotation={80}
+          shouldOrbit
+          orbitDuration="32s"
+          shouldSpin
+          spinDuration="7s"
+        >
           <SparkelIcon className="size-5 text-emerald-300/20" />
         </HeroOrbit>
-        <HeroOrbit size={520} rotation={-43} shouldOrbit orbitDuration="34s" shouldSpin spinDuration="7s">
+        <HeroOrbit
+          size={520}
+          rotation={-43}
+          shouldOrbit
+          orbitDuration="34s"
+          shouldSpin
+          spinDuration="7s"
+        >
           <div className="size-2 bg-emerald-300/20 rounded-full" />
         </HeroOrbit>
-        <HeroOrbit size={530} rotation={178} shouldOrbit orbitDuration="36s" shouldSpin spinDuration="7s">
+        <HeroOrbit
+          size={530}
+          rotation={178}
+          shouldOrbit
+          orbitDuration="36s"
+          shouldSpin
+          spinDuration="7s"
+        >
           <SparkelIcon className="size-10 text-emerald-300/20" />
         </HeroOrbit>
 
-        <HeroOrbit size={550} rotation={20} shouldOrbit orbitDuration="38s" shouldSpin spinDuration="7s">
+        <HeroOrbit
+          size={550}
+          rotation={20}
+          shouldOrbit
+          orbitDuration="38s"
+          shouldSpin
+          spinDuration="7s"
+        >
           <StarIcon className="size-12 text-emerald-300" />
         </HeroOrbit>
-        <HeroOrbit size={590} rotation={98} shouldOrbit orbitDuration="40s" shouldSpin spinDuration="7s">
+        <HeroOrbit
+          size={590}
+          rotation={98}
+          shouldOrbit
+          orbitDuration="40s"
+          shouldSpin
+          spinDuration="7s"
+        >
           <StarIcon className="size-8 text-emerald-300" />
         </HeroOrbit>
-        <HeroOrbit size={650} rotation={-5} shouldOrbit orbitDuration="42s" shouldSpin spinDuration="7s">
+        <HeroOrbit
+          size={650}
+          rotation={-5}
+          shouldOrbit
+          orbitDuration="42s"
+          shouldSpin
+          spinDuration="7s"
+        >
           <div className="size-3 bg-emerald-300/20 rounded-full" />
         </HeroOrbit>
 
-        <HeroOrbit size={710} rotation={144} shouldOrbit orbitDuration="44s" shouldSpin spinDuration="7s">
+        <HeroOrbit
+          size={710}
+          rotation={144}
+          shouldOrbit
+          orbitDuration="44s"
+          shouldSpin
+          spinDuration="7s"
+        >
           <SparkelIcon className="size-14 text-emerald-300/20" />
         </HeroOrbit>
-        <HeroOrbit size={721} rotation={85} shouldOrbit orbitDuration="46s" shouldSpin spinDuration="7s">
+        <HeroOrbit
+          size={721}
+          rotation={85}
+          shouldOrbit
+          orbitDuration="46s"
+          shouldSpin
+          spinDuration="7s"
+        >
           <div className="size-3 bg-emerald-300/20 rounded-full" />
         </HeroOrbit>
 
-        <HeroOrbit size={800} rotation={-72} shouldOrbit orbitDuration="48s" shouldSpin spinDuration="7s">
+        <HeroOrbit
+          size={800}
+          rotation={-72}
+          shouldOrbit
+          orbitDuration="48s"
+          shouldSpin
+          spinDuration="7s"
+        >
           <StarIcon className="size-28 text-emerald-300" />
         </HeroOrbit>
       </div>
       <div className="container">
         <div className="flex flex-col items-center gap-0">
-          <Image
+          {/* <Image
             src={memojiImage}
             className="size-[100px] block mx-auto"
             alt="Person peeking from behind laptop"
-          />
+          /> */}
+          {/* Wrapper defines the size; children overlap exactly */}
+          <div className="relative w-60 h-36">
+            {/* Pinging layer UNDER; grows upward because origin is bottom */}
+            <div
+              aria-hidden="true"
+              className="absolute inset-0 rounded-t-full bg-blue-500
+               origin-bottom animate-pingSmall
+               opacity-60 pointer-events-none z-0"
+            />
 
-          <div className="bg-gray-950 border border-gray-800 px-4 py-1.5 rounded-lg inline-flex items-center gap-4 ">
+            {/* Main semicircle on top */}
+            <div className="absolute inset-0 rounded-t-full bg-blue-500 z-10" />
+          </div>
+
+          <div className="bg-gray-950 border border-gray-800 px-6 py-2 w-80 rounded-lg inline-flex items-center justify-center gap-4 ">
             <div className="bg-green-500 size-2.5 rounded-full relative">
-              <div className="bg-green-500 absolute inset-0 animate-ping-large rounded-full"></div>
+              <div className="bg-green-500 absolute inset-0 animate-pingLarge rounded-full"></div>
             </div>
             <div className="text-sm font-medium">
               Available for new Projects

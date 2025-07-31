@@ -29,6 +29,7 @@ const config: Config = {
         pingLarge: "pingLarge 1s ease-in-out infinite",
         moveLeft: "moveLeft 10s linear infinite",
         moveRight: "moveRight 10s linear infinite",
+        pingSmall: "pingSmall 1s ease-in-out infinite",
       },
       keyframes: {
         pingLarge: {
@@ -36,6 +37,11 @@ const config: Config = {
             transform: "scale(3)",
             opacity: "0",
           },
+        },
+        pingSmall: {
+          '0%':   { transform: 'scale(1)',   opacity: '1' },
+          '75%':  { transform: 'scale(1.3)', opacity: '0' },
+          '100%': { transform: 'scale(1.5)', opacity: '0' },
         },
         moveLeft: {
           "0%": {
