@@ -1,5 +1,7 @@
 import ArrowRightIcon from "@/assets/icons/arrow-up-right.svg";
 import grainImage from "@/assets/images/grain.jpg";
+import { useRouter } from "next/router";
+import Link from "next/link";
 
 export const ContactSection = () => {
   return (
@@ -25,7 +27,7 @@ export const ContactSection = () => {
             </div>
             <div>
               <button className="text-white bg-gray-900 inline-flex items-center px-6 h-12 rounded-xl gap-2 mt-8 w-max border border-gray-950">
-                <span className="font-semibold">Contact Me</span>
+                <Link href={"/contact"}><span className="font-semibold">Contact Me</span></Link>
                 <ArrowRightIcon className="size-4" />
               </button>
             </div>
