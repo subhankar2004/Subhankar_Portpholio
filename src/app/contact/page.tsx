@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { Send, CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
+import LightRays from '@/blocks/Backgrounds/LightRays/LightRays';
+import BlurText from '@/blocks/TextAnimations/BlurText/BlurText';
 
 interface FormData {
   name: string;
@@ -25,30 +27,25 @@ const ContactPage = () => {
     subject: '',
     message: ''
   });
-
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
-
     if (!formData.name.trim()) {
       newErrors.name = 'Name is required';
     }
-
     if (!formData.email.trim()) {
       newErrors.email = 'Email is required';
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       newErrors.email = 'Please enter a valid email address';
     }
-
     if (!formData.message.trim()) {
       newErrors.message = 'Message is required';
     } else if (formData.message.trim().length < 10) {
       newErrors.message = 'Message must be at least 10 characters long';
     }
-
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -59,7 +56,6 @@ const ContactPage = () => {
       ...prev,
       [name]: value
     }));
-
     // Clear error for this field when user starts typing
     if (errors[name as keyof FormErrors]) {
       setErrors(prev => ({
@@ -75,18 +71,15 @@ const ContactPage = () => {
     if (!validateForm()) {
       return;
     }
-
     setIsSubmitting(true);
     setSubmitStatus('idle');
-
     try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
+      // In a real application, you would send the data here.
+      // We'll simulate a network request.
+      await new Promise(resolve => setTimeout(resolve, 2000));
+
+      // Simulate a successful response.
+      const response = { ok: true };
 
       if (response.ok) {
         setSubmitStatus('success');
@@ -109,29 +102,41 @@ const ContactPage = () => {
 
   return (
     <div className="relative min-h-screen bg-slate-900">
-      {/* Animated Background */}
-      <div className="fixed inset-0 w-full h-full bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(6,182,212,0.1),transparent_50%)]"></div>
+      {/* Animated Full-Page Background */}
+      <div className="fixed inset-0 w-full h-full z-0">
+        <LightRays
+          raysOrigin="top-center"
+          raysColor="#00ffff"
+          raysSpeed={1.5}
+          lightSpread={0.8}
+          rayLength={1.2}
+          followMouse={true}
+          mouseInfluence={0.1}
+          noiseAmount={0.1}
+          distortion={0.05}
+          className="custom-rays"
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 opacity-80"></div>
         <div 
+          className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(6,182,212,0.1),transparent_50%)]">
+        </div>
+        {/* <div 
           className="absolute inset-0 bg-[conic-gradient(from_0deg_at_50%_50%,transparent_0deg,rgba(6,182,212,0.05)_60deg,transparent_120deg)]" 
-          style={{
-            animation: 'spin 20s linear infinite'
-          }}
-        ></div>
-      </div>
-
-      {/* Decorative Elements */}
-      <div className="fixed inset-0 pointer-events-none">
-        <div className="absolute top-20 left-10 text-cyan-400/30 text-2xl animate-pulse">✦</div>
-        <div className="absolute top-40 right-20 text-cyan-400/20 text-xl animate-pulse" style={{animationDelay: '1s'}}>✧</div>
-        <div className="absolute bottom-40 left-20 text-cyan-400/25 text-lg animate-pulse" style={{animationDelay: '2s'}}>✦</div>
-        <div className="absolute bottom-20 right-10 text-cyan-400/30 text-2xl animate-pulse" style={{animationDelay: '0.5s'}}>✧</div>
+          style={{ animation: 'spin 20s linear infinite' }}
+        ></div> */}
+        {/* Decorative Elements */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-20 left-10 text-cyan-400/30 text-2xl animate-pulse">✦</div>
+          <div className="absolute top-40 right-20 text-cyan-400/20 text-xl animate-pulse" style={{animationDelay: '1s'}}>✧</div>
+          <div className="absolute bottom-40 left-20 text-cyan-400/25 text-lg animate-pulse" style={{animationDelay: '2s'}}>✦</div>
+          <div className="absolute bottom-20 right-10 text-cyan-400/30 text-2xl animate-pulse" style={{animationDelay: '0.5s'}}>✧</div>
+        </div>
       </div>
 
       {/* Content Layer */}
-      <div className="relative z-10 container mx-auto px-4">
+      <div className="relative z-10 container mx-auto px-4 py-12 md:py-20 flex flex-col justify-center min-h-screen">
         {/* Header Section */}
-        <div className="flex flex-col items-center justify-center text-center pt-20 pb-12">
+        <div className="flex flex-col items-center justify-center text-center pb-12">
           <div 
             className="animate-fade-in-up"
             style={{
@@ -139,14 +144,14 @@ const ContactPage = () => {
             }}
           >
             <h1 className="text-4xl md:text-5xl font-bold mb-8 text-white max-w-4xl">
-              Want to contact me !? Here is the form
+              <BlurText text="Want to contact me !? Here is the form" delay={0.1} className="text-4xl md:text-5xl font-bold text-white" />
             </h1>
           </div>
           <div className="w-24 h-px bg-gradient-to-r from-transparent via-cyan-400 to-transparent"></div>
         </div>
-
+        
         {/* Form Section */}
-        <div className="flex justify-center items-start pb-20">
+        <div className="flex justify-center items-start">
           <div className="w-full max-w-2xl">
             <div className="bg-slate-800/60 backdrop-blur-xl rounded-3xl p-8 md:p-12 border border-slate-700/50 shadow-2xl shadow-cyan-500/5">
               
@@ -162,7 +167,6 @@ const ContactPage = () => {
                   </div>
                 </div>
               )}
-
               {submitStatus === 'error' && (
                 <div className="mb-8 p-6 bg-red-500/10 border border-red-500/20 rounded-2xl backdrop-blur-sm">
                   <div className="flex items-center gap-3">
@@ -318,9 +322,13 @@ const ContactPage = () => {
           </div>
         </div>
       </div>
-
+      
       {/* Custom Styles */}
       <style jsx>{`
+        @keyframes spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
         @keyframes fadeInUp {
           from {
             opacity: 0;
