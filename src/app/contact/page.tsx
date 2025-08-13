@@ -163,7 +163,7 @@ const ContactPage = () => {
                     <CheckCircle className="w-6 h-6 text-emerald-400 flex-shrink-0" />
                     <div>
                       <p className="text-emerald-300 font-medium text-lg">Message sent successfully!</p>
-                      <p className="text-emerald-400/80 text-sm mt-1">I'll get back to you within 24 hours.</p>
+                      <p className="text-emerald-400/80 text-sm mt-1">I&apos;ll get back to you within 24 hours.</p>
                     </div>
                   </div>
                 </div>
