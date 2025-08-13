@@ -31,7 +31,7 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({message:"Please enter a valid email address"},{status:400});
     }
 
-    const testimonial = await prisma.testimonial.create({
+    const testimonial = await prisma.testimonials.create({
         data: {
             name:name.trim(),
             title,
