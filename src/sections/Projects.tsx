@@ -8,41 +8,42 @@ import grainImage from "@/assets/images/grain.jpg";
 
 const portfolioProjects = [
   {
-    company: "Acme Corp",
-    year: "2022",
-    title: "Dark Saas Landing Page",
-    results: [
-      { title: "Enhanced user experience by 40%" },
-      { title: "Improved site speed by 50%" },
-      { title: "Increased mobile traffic by 35%" },
-    ],
-    link: "",
-    image: darkSaasLandingPage,
-  },
-  {
-    company: "Innovative Co",
-    year: "2021",
-    title: "Light Saas Landing Page",
-    results: [
-      { title: "Boosted sales by 20%" },
-      { title: "Expanded customer reach by 35%" },
-      { title: "Increased brand awareness by 15%" },
-    ],
-    link: "",
-    image: lightSaasLandingPage,
-  },
-  {
-    company: "Quantum Dynamics",
-    year: "2023",
-    title: "AI Startup Landing Page",
-    results: [
-      { title: "Enhanced user experience by 40%" },
-      { title: "Improved site speed by 50%" },
-      { title: "Increased mobile traffic by 35%" },
-    ],
-    link: "",
-    image: aiStartupLandingPage,
-  },
+  company: "GDSC",
+  year: "2025",
+  title: "AI Powered Hospital Management System",
+  results: [
+    { title: "Implemented AI chatbot for patient form automation and appointment scheduling" },
+    { title: "Developed real-time dashboard for managing appointments" },
+    { title: "Integrated SMS and email notifications for patient updates" },
+  ],
+  link: "https://aayush-bharat-zo5s.vercel.app/",
+  image: darkSaasLandingPage,
+},
+{
+  company: "Sparkathon by Walmart",
+  year: "2025",
+  title: "Smart Return Management System",
+  results: [
+    { title: "Created AI-powered risk scoring for return validation" },
+    { title: "Integrated payment QR code generation for instant refunds" },
+    { title: "Developed admin dashboard for return request management" },
+  ],
+  link: "https://sparkathon-lemon.vercel.app/",
+  image: lightSaasLandingPage,
+},
+{
+  company: "Enigma",
+  year: "2026",
+  title: "AI Resume Builder",
+  results: [
+    { title: "Designed AI chatbot to collect user inputs for resume creation" },
+    { title: "Implemented customizable resume templates with instant preview" },
+    { title: "Enabled PDF and PNG export for generated resumes" },
+  ],
+  link: "",
+  image: aiStartupLandingPage,
+},
+
 ];
 
 export const ProjectsSection = () => {

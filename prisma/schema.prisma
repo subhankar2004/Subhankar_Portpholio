@@ -18,3 +18,22 @@ model ContactMessage {
   message   String
   createdAt DateTime @default(now()) @map(name: "created_at")
 }
+
+model Testimonial {
+  id          String   @id @default(cuid())
+  name        String
+  title       String
+  company     String
+  email       String
+  rating      Int      @db.SmallInt // 1-5 rating
+  message     String   @db.Text
+  category    String
+  avatarUrl   String?
+  allowPublic Boolean  @default(true)
+  isApproved  Boolean  @default(false) // For moderation
+  isPublished Boolean  @default(false)
+  createdAt   DateTime @default(now()) @map(name: "created_at")
+  updatedAt   DateTime @updatedAt @map(name: "updated_at")
+
+  @@map("testimonials")
+}
