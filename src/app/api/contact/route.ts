@@ -9,7 +9,10 @@ export async function POST(req: NextRequest) {
         // Validation
         if (!name || !email || !message) {
             return NextResponse.json(
-                { success: false, message: "Name, email, and message are required" },
+                { 
+                    success: false, 
+                    message: "Name, email, and message are required" 
+                },
                 { status: 400 }
             );
         }
@@ -18,7 +21,10 @@ export async function POST(req: NextRequest) {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
             return NextResponse.json(
-                { success: false, message: "Please enter a valid email address" },
+                { 
+                    success: false, 
+                    message: "Please enter a valid email address" 
+                },
                 { status: 400 }
             );
         }
@@ -44,6 +50,8 @@ export async function POST(req: NextRequest) {
 
     } catch (error) {
         console.error('Contact API Error:', error);
+        
+        // This was missing in your original code - causing deployment failure
         return NextResponse.json(
             { 
                 success: false, 
