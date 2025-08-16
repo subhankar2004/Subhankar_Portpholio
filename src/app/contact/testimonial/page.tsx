@@ -140,7 +140,7 @@ export default function TestimonialForm() {
 
     try {
       // Fixed API endpoint to match your route structure
-      const response = await fetch("/api/contact/testimonial", {
+      const response = await fetch("https://subhankar-portpholio.vercel.app/api/contact/testimonial", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

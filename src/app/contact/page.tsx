@@ -77,7 +77,7 @@ const ContactPage = () => {
     
     try {
       // Make actual API call to your backend
-      const response = await fetch('/api/contact', {
+      const response = await fetch('https://subhankar-portpholio.vercel.app/api/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
