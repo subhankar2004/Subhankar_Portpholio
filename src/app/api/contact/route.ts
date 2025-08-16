@@ -1,24 +1,16 @@
-// app/api/contact/route.ts - Version with Prisma
-"use server";
+// app/api/contact/route.ts
 import { NextRequest, NextResponse } from "next/server";
+import { PrismaClient } from '@prisma/client';
 
-// Dynamic import to handle potential Prisma issues during build
-async function getPrisma() {
-    try {
-        const { PrismaClient } = await import('@prisma/client');
-        return new PrismaClient();
-    } catch (error) {
-        console.error('Failed to import Prisma:', error);
-        return null;
-    }
-}
+// Initialize Prisma client
+const prisma = new PrismaClient();
 
 export async function POST(req: NextRequest) {
     try {
         const body = await req.json();
         const { name, email, subject, message } = body;
 
-        // Basic validation
+        // Validation
         if (!name || !email || !message) {
             return NextResponse.json(
                 { 
@@ -41,22 +33,7 @@ export async function POST(req: NextRequest) {
             );
         }
 
-        // Try to save to database
-        const prisma = await getPrisma();
-        
-        if (!prisma) {
-            // Fallback: log the message but still return success
-            console.log('Prisma not available, logging message:', { name, email, subject, message });
-            return NextResponse.json(
-                {
-                    success: true,
-                    message: 'Message received (database temporarily unavailable)',
-                    id: 'temp-id',
-                },
-                { status: 201 }
-            );
-        }
-
+        // Save to database
         const contactMessage = await prisma.contactMessage.create({
             data: {
                 name: name.trim(),
@@ -66,7 +43,7 @@ export async function POST(req: NextRequest) {
             }
         });
 
-        await prisma.$disconnect();
+        console.log('Contact message saved:', contactMessage.id);
 
         return NextResponse.json(
             {
@@ -87,15 +64,33 @@ export async function POST(req: NextRequest) {
             },
             { status: 500 }
         );
+    } finally {
+        await prisma.$disconnect();
     }
 }
 
 export async function GET() {
-    return NextResponse.json(
-        { 
-            success: true, 
-            message: 'Contact API is working' 
-        },
-        { status: 200 }
-    );
+    try {
+        // Test database connection
+        const count = await prisma.contactMessage.count();
+        return NextResponse.json(
+            { 
+                success: true, 
+                message: 'Contact API is working',
+                totalMessages: count
+            },
+            { status: 200 }
+        );
+    } catch (error) {
+        console.error('Database connection error:', error);
+        return NextResponse.json(
+            { 
+                success: false, 
+                message: 'Database connection failed' 
+            },
+            { status: 500 }
+        );
+    } finally {
+        await prisma.$disconnect();
+    }
 }
