@@ -11,7 +11,6 @@ interface FormData {
   email: string;
   subject: string;
   message: string;
-  
 }
 
 interface FormErrors {
@@ -72,17 +71,23 @@ const ContactPage = () => {
     if (!validateForm()) {
       return;
     }
+    
     setIsSubmitting(true);
     setSubmitStatus('idle');
+    
     try {
-      // In a real application, you would send the data here.
-      // We'll simulate a network request.
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      // Make actual API call to your backend
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
 
-      // Simulate a successful response.
-      const response = { ok: true };
+      const result = await response.json();
 
-      if (response.ok) {
+      if (response.ok && result.success) {
         setSubmitStatus('success');
         setFormData({
           name: '',
@@ -91,10 +96,11 @@ const ContactPage = () => {
           message: ''
         });
       } else {
+        console.error('API Error:', result.message);
         setSubmitStatus('error');
       }
     } catch (error) {
-      console.error('Error submitting form:', error);
+      console.error('Network Error submitting form:', error);
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
@@ -121,10 +127,6 @@ const ContactPage = () => {
         <div 
           className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(6,182,212,0.1),transparent_50%)]">
         </div>
-        {/* <div 
-          className="absolute inset-0 bg-[conic-gradient(from_0deg_at_50%_50%,transparent_0deg,rgba(6,182,212,0.05)_60deg,transparent_120deg)]" 
-          style={{ animation: 'spin 20s linear infinite' }}
-        ></div> */}
         {/* Decorative Elements */}
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-20 left-10 text-cyan-400/30 text-2xl animate-pulse">✦</div>

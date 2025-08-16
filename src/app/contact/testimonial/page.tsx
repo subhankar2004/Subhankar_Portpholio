@@ -139,7 +139,8 @@ export default function TestimonialForm() {
     setSubmitStatus("idle");
 
     try {
-      const response = await fetch("/api/testimonials", {
+      // Fixed API endpoint to match your route structure
+      const response = await fetch("/api/contact/testimonial", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -161,7 +162,7 @@ export default function TestimonialForm() {
 
       const data = await response.json();
 
-      if (response.ok) {
+      if (response.ok && data.success) {
         setSubmitStatus("success");
         setFormData({
           name: "",
@@ -179,7 +180,7 @@ export default function TestimonialForm() {
         console.error("Error submitting testimonial:", data.message);
       }
     } catch (error) {
-      console.error("Error submitting testimonial:", error);
+      console.error("Network error submitting testimonial:", error);
       setSubmitStatus("error");
     } finally {
       setIsSubmitting(false);
@@ -283,7 +284,8 @@ export default function TestimonialForm() {
                 </div>
               )}
 
-              <div className="space-y-8">
+              {/* Added form element wrapper */}
+              <form onSubmit={handleSubmit} className="space-y-8">
                 {/* Name and Title Row */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {/* Name Field */}
@@ -535,7 +537,7 @@ export default function TestimonialForm() {
                     )}
                   </button>
                 </div>
-              </div>
+              </form>
 
               {/* Note */}
               <div className="mt-8 pt-8 border-t border-slate-700/50">

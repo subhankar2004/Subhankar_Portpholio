@@ -18,50 +18,74 @@ export async function POST(req: NextRequest) {
       isPublished,
     } = body;
 
-    if (!name || !email || !message) {
+    // Validation
+    if (!name || !title || !company || !email || !rating || !message || !category) {
       return NextResponse.json(
-        { message: "All fields are required" },
+        { 
+          success: false, 
+          message: "Name, title, company, email, rating, message, and category are required" 
+        },
         { status: 400 }
       );
     }
 
-     //email verification
+    // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if(!emailRegex.test(email)){
-        return NextResponse.json({message:"Please enter a valid email address"},{status:400});
+    if (!emailRegex.test(email)) {
+      return NextResponse.json(
+        { 
+          success: false, 
+          message: "Please enter a valid email address" 
+        },
+        { status: 400 }
+      );
     }
 
+    // Rating validation
+    if (rating < 1 || rating > 5) {
+      return NextResponse.json(
+        { 
+          success: false, 
+          message: "Rating must be between 1 and 5" 
+        },
+        { status: 400 }
+      );
+    }
+
+    // Save testimonial to database
     const testimonial = await prisma.testimonial.create({
-        data: {
-            name:name.trim(),
-            title,
-            company,
-            email:email.trim().toLowerCase(),
-            rating,
-            message:message.trim(),
-            category:category?.trim()||null,
-            avatarUrl,
-            allowPublic,
-            isApproved,
-            isPublished
-        }
+      data: {
+        name: name.trim(),
+        title: title.trim(),
+        company: company.trim(),
+        email: email.trim().toLowerCase(),
+        rating: parseInt(rating),
+        message: message.trim(),
+        category: category.trim(),
+        avatarUrl: avatarUrl?.trim() || null,
+        allowPublic: allowPublic ?? true,
+        isApproved: isApproved ?? false,
+        isPublished: isPublished ?? false,
+      }
     });
 
     return NextResponse.json(
-        {
-            success: true,
-            message: 'Testimonial saved successfully',
-            id: testimonial.id
-        },
-        {
-            status: 201
-        }
-    )
-
-
-
+      {
+        success: true,
+        message: 'Testimonial saved successfully',
+        id: testimonial.id
+      },
+      { status: 201 }
+    );
 
   } catch (error) {
-    console.log("Error in creating testimonial",error);
+    console.error("Error in creating testimonial:", error);
+    return NextResponse.json(
+      { 
+        success: false, 
+        message: 'Internal server error. Please try again later.' 
+      },
+      { status: 500 }
+    );
   }
 }
