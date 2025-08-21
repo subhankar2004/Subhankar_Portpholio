@@ -65,7 +65,7 @@ const ContactPage = () => {
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!validateForm()) {
@@ -76,8 +76,8 @@ const ContactPage = () => {
     setSubmitStatus('idle');
     
     try {
-      // Make actual API call to your backend
-      const response = await fetch('https://subhankar-portpholio.vercel.app/api/contact', {
+      // Use a relative URL for the API call
+      const response = await fetch('/api/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -106,6 +106,7 @@ const ContactPage = () => {
       setIsSubmitting(false);
     }
   };
+
 
   return (
     <div className="relative min-h-screen bg-slate-900">

@@ -139,12 +139,13 @@ export default function TestimonialForm() {
     setSubmitStatus("idle");
 
     try {
-      // Fixed API endpoint to match your route structure
-      const response = await fetch("https://subhankar-portpholio.vercel.app/api/contact/testimonial", {
+      // Use a relative URL for the API call
+      const response = await fetch("/api/contact/testimonial", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
+        // Removed isApproved and isPublished for security
         body: JSON.stringify({
           name: formData.name.trim(),
           title: formData.title.trim(),
@@ -155,8 +156,6 @@ export default function TestimonialForm() {
           category: formData.category.trim(),
           avatarUrl: formData.avatarUrl.trim() || null,
           allowPublic: formData.allowPublic,
-          isApproved: false,
-          isPublished: false,
         }),
       });
 

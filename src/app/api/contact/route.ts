@@ -1,17 +1,5 @@
-// app/api/contact/route.ts - Version with Prisma
-"use server";
 import { NextRequest, NextResponse } from "next/server";
-
-// Dynamic import to handle potential Prisma issues during build
-async function getPrisma() {
-    try {
-        const { PrismaClient } = await import('@prisma/client');
-        return new PrismaClient();
-    } catch (error) {
-        console.error('Failed to import Prisma:', error);
-        return null;
-    }
-}
+import prisma from "../../../../lib/prisma";// Use the new singleton instance
 
 export async function POST(req: NextRequest) {
     try {
@@ -21,9 +9,9 @@ export async function POST(req: NextRequest) {
         // Basic validation
         if (!name || !email || !message) {
             return NextResponse.json(
-                { 
-                    success: false, 
-                    message: "Name, email, and message are required" 
+                {
+                    success: false,
+                    message: "Name, email, and message are required"
                 },
                 { status: 400 }
             );
@@ -33,27 +21,11 @@ export async function POST(req: NextRequest) {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
             return NextResponse.json(
-                { 
-                    success: false, 
-                    message: "Please enter a valid email address" 
+                {
+                    success: false,
+                    message: "Please enter a valid email address"
                 },
                 { status: 400 }
-            );
-        }
-
-        // Try to save to database
-        const prisma = await getPrisma();
-        
-        if (!prisma) {
-            // Fallback: log the message but still return success
-            console.log('Prisma not available, logging message:', { name, email, subject, message });
-            return NextResponse.json(
-                {
-                    success: true,
-                    message: 'Message received (database temporarily unavailable)',
-                    id: 'temp-id',
-                },
-                { status: 201 }
             );
         }
 
@@ -65,8 +37,6 @@ export async function POST(req: NextRequest) {
                 message: message.trim()
             }
         });
-
-        await prisma.$disconnect();
 
         return NextResponse.json(
             {
@@ -81,9 +51,9 @@ export async function POST(req: NextRequest) {
         console.error('Contact API Error:', error);
         
         return NextResponse.json(
-            { 
-                success: false, 
-                message: 'Internal server error. Please try again later.' 
+            {
+                success: false,
+                message: 'Internal server error. Please try again later.'
             },
             { status: 500 }
         );
@@ -92,9 +62,9 @@ export async function POST(req: NextRequest) {
 
 export async function GET() {
     return NextResponse.json(
-        { 
-            success: true, 
-            message: 'Contact API is working' 
+        {
+            success: true,
+            message: 'Contact API is working'
         },
         { status: 200 }
     );
