@@ -12,6 +12,7 @@ import Download from "@/assets/icons/download.svg";
 import { useHideOnScroll } from "@/hooks/useHideOnScroll";
 import { useCallback, useEffect } from "react";
 import { label } from "motion/react-client";
+import { useRouter } from "next/navigation"; // Import the useRouter hook
 
 const link = {
   label: "Projects",
@@ -19,6 +20,7 @@ const link = {
 };
 
 export const HeroSection = () => {
+  const router = useRouter(); // Initialize the router
   const hidden = useHideOnScroll({ threshold: 6, showAt: 40 });
 
   // Measure the navbar height and add the 12px top gap from `top-3`
@@ -53,8 +55,12 @@ export const HeroSection = () => {
 
   // Handle "Explore My Work" button click
   const handleExploreWork = () => {
-    console.log("Explore My Work clicked!"); // Debug log
     scrollToId("projects");
+  };
+
+  // New handler function to navigate to the resume page
+  const handleResumeClick = () => {
+    router.push("/Subhankar_resume.pdf");
   };
 
   return (
@@ -215,12 +221,8 @@ export const HeroSection = () => {
           </p>
         </div>
         <div className="flex flex-col md:flex-row justify-center items-center mt-8 gap-4">
-          {/* Your "Explore My Work" button remains the same */}
           <button
-            onClick={(e) => {
-              e.preventDefault();
-              handleExploreWork();
-            }}
+            onClick={handleExploreWork}
             type="button"
             className="inline-flex items-center gap-2 border border-white/15 px-6 h-12 rounded-lg hover:bg-white/5 transition-colors cursor-pointer"
           >
@@ -228,16 +230,15 @@ export const HeroSection = () => {
             <ArrowDown className="size-4" />
           </button>
 
-          {/* DELETE your old resume button/link and PASTE this one.
-           */}
-          <a
-            href="/Subhankar_resume.pdf"
-            download="Subhankar_resume.pdf"
+          {/* New Resume Button */}
+          <button
+            onClick={handleResumeClick}
+            type="button"
             className="inline-flex items-center gap-2 border border-white bg-white text-gray-900 px-6 h-12 rounded-xl hover:scale-105 active:scale-100 transition-transform cursor-pointer"
           >
             <Download className="size-6 text-red-900" />
             <span className="font-semibold">My Resume</span>
-          </a>
+          </button>
         </div>
       </div>
     </div>
