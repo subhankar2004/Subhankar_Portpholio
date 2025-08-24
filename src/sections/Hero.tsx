@@ -15,8 +15,8 @@ import { label } from "motion/react-client";
 
 const link = {
   label: "Projects",
-  id: "projects"
-}
+  id: "projects",
+};
 
 export const HeroSection = () => {
   const hidden = useHideOnScroll({ threshold: 6, showAt: 40 });
@@ -57,22 +57,6 @@ export const HeroSection = () => {
     scrollToId("projects");
   };
 
-  // Handle resume download
-  const handleDownload = () => {
-    console.log("Download clicked!"); // Debug log
-    // Try window.open first as fallback
-    window.open('/Subhankar_resume.pdf', '_blank');
-    
-    // Also try the programmatic download
-    const link = document.createElement('a');
-    link.href = '/Subhankar_resume.pdf';
-    link.download = 'Subhankar_resume.pdf';
-    link.target = '_blank';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
-
   return (
     <div className="py-32 md:py-48 lg:py-60 relative z-0 overflow-x-clip">
       <div className="absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent,black_10%,black_70%,transparent)]">
@@ -84,7 +68,7 @@ export const HeroSection = () => {
         <div className="size-[820px] hero-ring"></div>
         <div className="size-[1020px] hero-ring"></div>
         <div className="size-[1220px] hero-ring"></div>
-        
+
         <HeroOrbit
           size={430}
           rotation={-14}
@@ -231,10 +215,10 @@ export const HeroSection = () => {
           </p>
         </div>
         <div className="flex flex-col md:flex-row justify-center items-center mt-8 gap-4">
-          <button 
+          {/* Your "Explore My Work" button remains the same */}
+          <button
             onClick={(e) => {
               e.preventDefault();
-              console.log("Button 1 clicked!");
               handleExploreWork();
             }}
             type="button"
@@ -243,18 +227,17 @@ export const HeroSection = () => {
             <span className="font-semibold">Explore My Work</span>
             <ArrowDown className="size-4" />
           </button>
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              console.log("Button 2 clicked!");
-              handleDownload();
-            }}
-            type="button"
+
+          {/* DELETE your old resume button/link and PASTE this one.
+           */}
+          <a
+            href="/Subhankar_resume.pdf"
+            download="Subhankar_resume.pdf"
             className="inline-flex items-center gap-2 border border-white bg-white text-gray-900 px-6 h-12 rounded-xl hover:scale-105 active:scale-100 transition-transform cursor-pointer"
           >
             <Download className="size-6 text-red-900" />
             <span className="font-semibold">My Resume</span>
-          </button>
+          </a>
         </div>
       </div>
     </div>
