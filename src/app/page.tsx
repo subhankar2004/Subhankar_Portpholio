@@ -7,7 +7,8 @@ import { AboutSection } from "@/sections/About";
 import { ContactSection } from "@/sections/Contact";
 import { Footer } from "@/sections/Footer";
 
-export default function Home() {
+export default async function Home() {
+  await new Promise(resolve => setTimeout(resolve, 2000));
   return (
     <div>
       <Header />
