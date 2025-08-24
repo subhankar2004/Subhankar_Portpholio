@@ -35,7 +35,7 @@ const testimonials = [
   },
   {
     name: "P Padarabinda",
-    position: "HR @ Barclays",
+    position: "Co-Ordinator @ Quizzine",
     text: "Subhankar's work on our website has been nothing short of exceptional. He's a talented developer who is also a great communicator. We highly recommend him.",
     avatar: memojiAvatar5,
   },
