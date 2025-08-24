@@ -94,12 +94,12 @@ export async function POST(req: NextRequest) {
   }
 }
 
-export async function GET() {
-  return NextResponse.json(
-    {
-      success: true,
-      message: "Testimonial API is working",
-    },
-    { status: 200 }
-  );
+//Getting all testimonial responses 
+export async function GET(){
+  const testimonial=await prisma.testimonial.findMany();
+  return NextResponse.json({
+    success:true,
+    message:"Testimonial API is working",
+    testimonial
+  });
 }
