@@ -202,7 +202,7 @@ export default  function TestimonialForm() {
             }`}
           >
             <Star
-              className={`w-8 h-8 ${
+              className={`w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 ${
                 star <= formData.rating ? "fill-current" : ""
               }`}
             />
@@ -227,73 +227,84 @@ export default  function TestimonialForm() {
         
         {/* Decorative Elements */}
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-20 left-10 text-cyan-400/30 text-2xl animate-pulse">✦</div>
-          <div className="absolute top-40 right-20 text-purple-400/20 text-xl animate-pulse" style={{animationDelay: '1s'}}>✧</div>
-          <div className="absolute bottom-40 left-20 text-pink-400/25 text-lg animate-pulse" style={{animationDelay: '2s'}}>✦</div>
-          <div className="absolute bottom-20 right-10 text-cyan-400/30 text-2xl animate-pulse" style={{animationDelay: '0.5s'}}>✧</div>
+          <div className="absolute top-16 sm:top-20 left-6 sm:left-10 text-cyan-400/30 text-lg sm:text-2xl animate-pulse">✦</div>
+          <div className="absolute top-32 sm:top-40 right-12 sm:right-20 text-purple-400/20 text-base sm:text-xl animate-pulse" style={{animationDelay: '1s'}}>✧</div>
+          <div className="absolute bottom-32 sm:bottom-40 left-12 sm:left-20 text-pink-400/25 text-sm sm:text-lg animate-pulse" style={{animationDelay: '2s'}}>✦</div>
+          <div className="absolute bottom-16 sm:bottom-20 right-6 sm:right-10 text-cyan-400/30 text-lg sm:text-2xl animate-pulse" style={{animationDelay: '0.5s'}}>✧</div>
         </div>
       </div>
 
       {/* Content Layer */}
-      <div className="relative z-10 container mx-auto px-4 py-12 md:py-20 flex flex-col justify-center min-h-screen">
+      <div className="relative z-10 container mx-auto px-3 sm:px-4 py-6 sm:py-8 md:py-12 lg:py-20 flex flex-col justify-center min-h-screen max-w-7xl">
         {/* Header Section */}
-        <div className="flex flex-col items-center justify-center text-center pb-12">
+        <div className="flex flex-col items-center justify-center text-center pb-4 sm:pb-6 md:pb-8 lg:pb-12">
           <div 
-            className="animate-fade-in-up"
+            className="animate-fade-in-up w-full"
             style={{
               animation: 'fadeInUp 0.8s ease-out'
             }}
           >
-            <h1 className="text-4xl md:text-5xl font-bold mb-8 text-white max-w-4xl">
-              <BlurText 
-                text="Share Your Experience - Write a Testimonial" 
-                delay={0.1} 
-                className="text-4xl md:text-5xl font-bold text-white" 
-              />
+            <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold mb-4 sm:mb-6 md:mb-8 text-white max-w-4xl mx-auto px-2 leading-tight">
+              {/* Mobile heading */}
+              <div className="block sm:hidden">
+                <BlurText 
+                  text="Write a Testimonial" 
+                  delay={0.1} 
+                  className="text-xl font-bold text-white leading-tight" 
+                />
+              </div>
+              {/* Tablet and Desktop heading */}
+              <div className=" flex items-center justify-center">
+                <BlurText 
+                  text="Write a Testimonial" 
+                  delay={0.1} 
+                  className="text-xl font-bold text-white leading-tight" 
+                />
+              </div>
             </h1>
           </div>
-          <div className="w-24 h-px bg-gradient-to-r from-transparent via-purple-400 to-transparent"></div>
+          <div className="w-12 sm:w-16 md:w-20 lg:w-24 h-px bg-gradient-to-r from-transparent via-purple-400 to-transparent"></div>
         </div>
         
         {/* Form Section */}
-        <div className="flex justify-center items-start">
+        <div className="flex justify-center items-start px-2 sm:px-0">
           <div className="w-full max-w-3xl">
-            <div className="bg-slate-800/60 backdrop-blur-xl rounded-3xl p-8 md:p-12 border border-slate-700/50 shadow-2xl shadow-purple-500/5">
+            <div className="bg-slate-800/60 backdrop-blur-xl rounded-xl sm:rounded-2xl lg:rounded-3xl p-3 sm:p-4 md:p-6 lg:p-8 xl:p-12 border border-slate-700/50 shadow-2xl shadow-purple-500/5">
               
               {/* Status Messages */}
               {submitStatus === 'success' && (
-                <div className="mb-8 p-6 bg-emerald-500/10 border border-emerald-500/20 rounded-2xl backdrop-blur-sm">
-                  <div className="flex items-center gap-3">
-                    <CheckCircle className="w-6 h-6 text-emerald-400 flex-shrink-0" />
+                <div className="mb-4 sm:mb-6 lg:mb-8 p-3 sm:p-4 lg:p-6 bg-emerald-500/10 border border-emerald-500/20 rounded-lg sm:rounded-xl lg:rounded-2xl backdrop-blur-sm">
+                  <div className="flex items-start gap-2 sm:gap-3">
+                    <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-emerald-400 flex-shrink-0 mt-0.5 sm:mt-0" />
                     <div>
-                      <p className="text-emerald-300 font-medium text-lg">Testimonial submitted successfully!</p>
-                      <p className="text-emerald-400/80 text-sm mt-1">Thank you for your feedback. It will be reviewed before publishing.</p>
+                      <p className="text-emerald-300 font-medium text-sm sm:text-base lg:text-lg">Testimonial submitted successfully!</p>
+                      <p className="text-emerald-400/80 text-xs sm:text-sm mt-1">Thank you for your feedback. It will be reviewed before publishing.</p>
                     </div>
                   </div>
                 </div>
               )}
               
               {submitStatus === 'error' && (
-                <div className="mb-8 p-6 bg-red-500/10 border border-red-500/20 rounded-2xl backdrop-blur-sm">
-                  <div className="flex items-center gap-3">
-                    <AlertCircle className="w-6 h-6 text-red-400 flex-shrink-0" />
+                <div className="mb-4 sm:mb-6 lg:mb-8 p-3 sm:p-4 lg:p-6 bg-red-500/10 border border-red-500/20 rounded-lg sm:rounded-xl lg:rounded-2xl backdrop-blur-sm">
+                  <div className="flex items-start gap-2 sm:gap-3">
+                    <AlertCircle className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-red-400 flex-shrink-0 mt-0.5 sm:mt-0" />
                     <div>
-                      <p className="text-red-300 font-medium text-lg">Something went wrong</p>
-                      <p className="text-red-400/80 text-sm mt-1">Please try again or contact me directly.</p>
+                      <p className="text-red-300 font-medium text-sm sm:text-base lg:text-lg">Something went wrong</p>
+                      <p className="text-red-400/80 text-xs sm:text-sm mt-1">Please try again or contact me directly.</p>
                     </div>
                   </div>
                 </div>
               )}
 
               {/* Added form element wrapper */}
-              <form onSubmit={handleSubmit} className="space-y-8">
+              <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6 lg:space-y-8">
                 {/* Name and Title Row */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-1 gap-3 sm:gap-4 lg:gap-6">
                   {/* Name Field */}
-                  <div className="space-y-2">
+                  <div className="space-y-1 sm:space-y-2">
                     <label
                       htmlFor="name"
-                      className="block text-sm font-semibold text-purple-300 tracking-wide"
+                      className="block text-xs sm:text-sm font-semibold text-purple-300 tracking-wide"
                     >
                       Full Name *
                     </label>
@@ -303,24 +314,24 @@ export default  function TestimonialForm() {
                       name="name"
                       value={formData.name}
                       onChange={handleInputChange}
-                      className={`w-full px-4 py-4 bg-slate-900/70 border rounded-xl text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-400/50 focus:border-purple-400/50 transition-all duration-300 ${
+                      className={`w-full px-2.5 sm:px-3 lg:px-4 py-2.5 sm:py-3 lg:py-4 bg-slate-900/70 border rounded-lg sm:rounded-xl text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-400/50 focus:border-purple-400/50 transition-all duration-300 text-sm sm:text-base ${
                         errors.name ? 'border-red-500/50 focus:ring-red-400/50' : 'border-slate-600/30'
                       }`}
                       placeholder="Your full name"
                     />
                     {errors.name && (
-                      <p className="text-sm text-red-400 flex items-center gap-2">
-                        <AlertCircle className="w-4 h-4" />
+                      <p className="text-xs sm:text-sm text-red-400 flex items-center gap-1 sm:gap-2">
+                        <AlertCircle className="w-3 h-3 sm:w-4 sm:h-4" />
                         {errors.name}
                       </p>
                     )}
                   </div>
 
                   {/* Title Field */}
-                  <div className="space-y-2">
+                  <div className="space-y-1 sm:space-y-2">
                     <label
                       htmlFor="title"
-                      className="block text-sm font-semibold text-purple-300 tracking-wide"
+                      className="block text-xs sm:text-sm font-semibold text-purple-300 tracking-wide"
                     >
                       Job Title *
                     </label>
@@ -330,14 +341,14 @@ export default  function TestimonialForm() {
                       name="title"
                       value={formData.title}
                       onChange={handleInputChange}
-                      className={`w-full px-4 py-4 bg-slate-900/70 border rounded-xl text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-400/50 focus:border-purple-400/50 transition-all duration-300 ${
+                      className={`w-full px-2.5 sm:px-3 lg:px-4 py-2.5 sm:py-3 lg:py-4 bg-slate-900/70 border rounded-lg sm:rounded-xl text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-400/50 focus:border-purple-400/50 transition-all duration-300 text-sm sm:text-base ${
                         errors.title ? 'border-red-500/50 focus:ring-red-400/50' : 'border-slate-600/30'
                       }`}
-                      placeholder="e.g. CEO, Developer, Designer"
+                      placeholder="e.g. CEO, Developer"
                     />
                     {errors.title && (
-                      <p className="text-sm text-red-400 flex items-center gap-2">
-                        <AlertCircle className="w-4 h-4" />
+                      <p className="text-xs sm:text-sm text-red-400 flex items-center gap-1 sm:gap-2">
+                        <AlertCircle className="w-3 h-3 sm:w-4 sm:h-4" />
                         {errors.title}
                       </p>
                     )}
@@ -345,12 +356,12 @@ export default  function TestimonialForm() {
                 </div>
 
                 {/* Company and Email Row */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-1 gap-3 sm:gap-4 lg:gap-6">
                   {/* Company Field */}
-                  <div className="space-y-2">
+                  <div className="space-y-1 sm:space-y-2">
                     <label
                       htmlFor="company"
-                      className="block text-sm font-semibold text-purple-300 tracking-wide"
+                      className="block text-xs sm:text-sm font-semibold text-purple-300 tracking-wide"
                     >
                       Company *
                     </label>
@@ -360,24 +371,24 @@ export default  function TestimonialForm() {
                       name="company"
                       value={formData.company}
                       onChange={handleInputChange}
-                      className={`w-full px-4 py-4 bg-slate-900/70 border rounded-xl text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-400/50 focus:border-purple-400/50 transition-all duration-300 ${
+                      className={`w-full px-2.5 sm:px-3 lg:px-4 py-2.5 sm:py-3 lg:py-4 bg-slate-900/70 border rounded-lg sm:rounded-xl text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-400/50 focus:border-purple-400/50 transition-all duration-300 text-sm sm:text-base ${
                         errors.company ? 'border-red-500/50 focus:ring-red-400/50' : 'border-slate-600/30'
                       }`}
                       placeholder="Your company name"
                     />
                     {errors.company && (
-                      <p className="text-sm text-red-400 flex items-center gap-2">
-                        <AlertCircle className="w-4 h-4" />
+                      <p className="text-xs sm:text-sm text-red-400 flex items-center gap-1 sm:gap-2">
+                        <AlertCircle className="w-3 h-3 sm:w-4 sm:h-4" />
                         {errors.company}
                       </p>
                     )}
                   </div>
 
                   {/* Email Field */}
-                  <div className="space-y-2">
+                  <div className="space-y-1 sm:space-y-2">
                     <label
                       htmlFor="email"
-                      className="block text-sm font-semibold text-purple-300 tracking-wide"
+                      className="block text-xs sm:text-sm font-semibold text-purple-300 tracking-wide"
                     >
                       Email *
                     </label>
@@ -387,14 +398,14 @@ export default  function TestimonialForm() {
                       name="email"
                       value={formData.email}
                       onChange={handleInputChange}
-                      className={`w-full px-4 py-4 bg-slate-900/70 border rounded-xl text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-400/50 focus:border-purple-400/50 transition-all duration-300 ${
+                      className={`w-full px-2.5 sm:px-3 lg:px-4 py-2.5 sm:py-3 lg:py-4 bg-slate-900/70 border rounded-lg sm:rounded-xl text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-400/50 focus:border-purple-400/50 transition-all duration-300 text-sm sm:text-base ${
                         errors.email ? 'border-red-500/50 focus:ring-red-400/50' : 'border-slate-600/30'
                       }`}
                       placeholder="your.email@company.com"
                     />
                     {errors.email && (
-                      <p className="text-sm text-red-400 flex items-center gap-2">
-                        <AlertCircle className="w-4 h-4" />
+                      <p className="text-xs sm:text-sm text-red-400 flex items-center gap-1 sm:gap-2">
+                        <AlertCircle className="w-3 h-3 sm:w-4 sm:h-4" />
                         {errors.email}
                       </p>
                     )}
@@ -402,33 +413,33 @@ export default  function TestimonialForm() {
                 </div>
 
                 {/* Rating and Category Row */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-1 gap-3 sm:gap-4 lg:gap-6">
                   {/* Rating Field */}
-                  <div className="space-y-2">
-                    <label className="block text-sm font-semibold text-purple-300 tracking-wide">
+                  <div className="space-y-1 sm:space-y-2">
+                    <label className="block text-xs sm:text-sm font-semibold text-purple-300 tracking-wide">
                       Rating *
                     </label>
-                    <div className="flex flex-col gap-2">
+                    <div className="flex flex-col gap-1 sm:gap-2">
                       <StarRating />
                       {formData.rating > 0 && (
-                        <p className="text-sm text-slate-400">
+                        <p className="text-xs sm:text-sm text-slate-400">
                           {formData.rating} out of 5 stars
                         </p>
                       )}
                     </div>
                     {errors.rating && (
-                      <p className="text-sm text-red-400 flex items-center gap-2">
-                        <AlertCircle className="w-4 h-4" />
+                      <p className="text-xs sm:text-sm text-red-400 flex items-center gap-1 sm:gap-2">
+                        <AlertCircle className="w-3 h-3 sm:w-4 sm:h-4" />
                         {errors.rating}
                       </p>
                     )}
                   </div>
 
                   {/* Category Field */}
-                  <div className="space-y-2">
+                  <div className="space-y-1 sm:space-y-2">
                     <label
                       htmlFor="category"
-                      className="block text-sm font-semibold text-purple-300 tracking-wide"
+                      className="block text-xs sm:text-sm font-semibold text-purple-300 tracking-wide"
                     >
                       Service Category *
                     </label>
@@ -437,7 +448,7 @@ export default  function TestimonialForm() {
                       name="category"
                       value={formData.category}
                       onChange={handleInputChange}
-                      className={`w-full px-4 py-4 bg-slate-900/70 border rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-purple-400/50 focus:border-purple-400/50 transition-all duration-300 ${
+                      className={`w-full px-2.5 sm:px-3 lg:px-4 py-2.5 sm:py-3 lg:py-4 bg-slate-900/70 border rounded-lg sm:rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-purple-400/50 focus:border-purple-400/50 transition-all duration-300 text-sm sm:text-base ${
                         errors.category ? 'border-red-500/50 focus:ring-red-400/50' : 'border-slate-600/30'
                       }`}
                     >
@@ -449,8 +460,8 @@ export default  function TestimonialForm() {
                       ))}
                     </select>
                     {errors.category && (
-                      <p className="text-sm text-red-400 flex items-center gap-2">
-                        <AlertCircle className="w-4 h-4" />
+                      <p className="text-xs sm:text-sm text-red-400 flex items-center gap-1 sm:gap-2">
+                        <AlertCircle className="w-3 h-3 sm:w-4 sm:h-4" />
                         {errors.category}
                       </p>
                     )}
@@ -458,10 +469,10 @@ export default  function TestimonialForm() {
                 </div>
 
                 {/* Avatar URL Field */}
-                <div className="space-y-2">
+                <div className="space-y-1 sm:space-y-2">
                   <label
                     htmlFor="avatarUrl"
-                    className="block text-sm font-semibold text-purple-300 tracking-wide"
+                    className="block text-xs sm:text-sm font-semibold text-purple-300 tracking-wide"
                   >
                     Profile Picture URL (Optional)
                   </label>
@@ -471,68 +482,68 @@ export default  function TestimonialForm() {
                     name="avatarUrl"
                     value={formData.avatarUrl}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-4 bg-slate-900/70 border border-slate-600/30 rounded-xl text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-400/50 focus:border-purple-400/50 transition-all duration-300"
+                    className="w-full px-2.5 sm:px-3 lg:px-4 py-2.5 sm:py-3 lg:py-4 bg-slate-900/70 border border-slate-600/30 rounded-lg sm:rounded-xl text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-400/50 focus:border-purple-400/50 transition-all duration-300 text-sm sm:text-base"
                     placeholder="https://example.com/your-photo.jpg"
                   />
                 </div>
 
                 {/* Message Field */}
-                <div className="space-y-2">
+                <div className="space-y-1 sm:space-y-2">
                   <label
                     htmlFor="message"
-                    className="block text-sm font-semibold text-purple-300 tracking-wide"
+                    className="block text-xs sm:text-sm font-semibold text-purple-300 tracking-wide"
                   >
                     Your Testimonial *
                   </label>
                   <textarea
                     id="message"
                     name="message"
-                    rows={6}
+                    rows={4}
                     value={formData.message}
                     onChange={handleInputChange}
-                    className={`w-full px-4 py-4 bg-slate-900/70 border rounded-xl text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-400/50 focus:border-purple-400/50 transition-all duration-300 resize-none ${
+                    className={`w-full px-2.5 sm:px-3 lg:px-4 py-2.5 sm:py-3 lg:py-4 bg-slate-900/70 border rounded-lg sm:rounded-xl text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-400/50 focus:border-purple-400/50 transition-all duration-300 resize-none text-sm sm:text-base ${
                       errors.message ? 'border-red-500/50 focus:ring-red-400/50' : 'border-slate-600/30'
                     }`}
                     placeholder="Share your experience working with me. What was the project about? How did it go? Would you recommend my services?"
                   />
                   {errors.message && (
-                    <p className="text-sm text-red-400 flex items-center gap-2">
-                      <AlertCircle className="w-4 h-4" />
+                    <p className="text-xs sm:text-sm text-red-400 flex items-center gap-1 sm:gap-2">
+                      <AlertCircle className="w-3 h-3 sm:w-4 sm:h-4" />
                       {errors.message}
                     </p>
                   )}
                 </div>
 
                 {/* Privacy Checkbox */}
-                <div className="flex items-center gap-3">
+                <div className="flex items-start sm:items-center gap-2 sm:gap-3">
                   <input
                     type="checkbox"
                     id="allowPublic"
                     name="allowPublic"
                     checked={formData.allowPublic}
                     onChange={handleInputChange}
-                    className="w-5 h-5 text-purple-500 bg-slate-900/70 border-slate-600/30 rounded focus:ring-purple-400/50 focus:ring-2"
+                    className="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 bg-slate-900/70 border-slate-600/30 rounded focus:ring-purple-400/50 focus:ring-2 mt-0.5 sm:mt-0"
                   />
-                  <label htmlFor="allowPublic" className="text-sm text-slate-300">
+                  <label htmlFor="allowPublic" className="text-xs sm:text-sm text-slate-300 leading-tight">
                     I allow this testimonial to be displayed publicly on the website
                   </label>
                 </div>
 
                 {/* Submit Button */}
-                <div className="pt-4">
+                <div className="pt-1 sm:pt-2 lg:pt-4">
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-400 hover:to-pink-500 disabled:from-slate-600 disabled:to-slate-700 text-white font-semibold py-4 px-8 rounded-xl transition-all duration-300 transform hover:scale-[1.02] hover:shadow-xl hover:shadow-purple-500/25 disabled:scale-100 disabled:shadow-none disabled:cursor-not-allowed group"
+                    className="w-full bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-400 hover:to-pink-500 disabled:from-slate-600 disabled:to-slate-700 text-white font-semibold py-2.5 sm:py-3 lg:py-4 px-4 sm:px-6 lg:px-8 rounded-lg sm:rounded-xl transition-all duration-300 transform hover:scale-[1.02] hover:shadow-xl hover:shadow-purple-500/25 disabled:scale-100 disabled:shadow-none disabled:cursor-not-allowed group text-sm sm:text-base"
                   >
                     {isSubmitting ? (
-                      <span className="flex items-center justify-center gap-3">
-                        <Loader2 className="w-5 h-5 animate-spin" />
-                        Submitting Testimonial...
+                      <span className="flex items-center justify-center gap-2 sm:gap-3">
+                        <Loader2 className="w-4 h-4 sm:w-5 sm:h-5 animate-spin" />
+                        Submitting...
                       </span>
                     ) : (
-                      <span className="flex items-center justify-center gap-3">
-                        <Send className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+                      <span className="flex items-center justify-center gap-2 sm:gap-3">
+                        <Send className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform duration-300" />
                         Submit Testimonial
                       </span>
                     )}
@@ -541,9 +552,9 @@ export default  function TestimonialForm() {
               </form>
 
               {/* Note */}
-              <div className="mt-8 pt-8 border-t border-slate-700/50">
+              <div className="mt-4 sm:mt-6 lg:mt-8 pt-4 sm:pt-6 lg:pt-8 border-t border-slate-700/50">
                 <div className="text-center">
-                  <p className="text-slate-400 text-sm">
+                  <p className="text-slate-400 text-xs sm:text-sm">
                     Your testimonial will be reviewed before being published. Thank you for taking the time to share your experience!
                   </p>
                 </div>

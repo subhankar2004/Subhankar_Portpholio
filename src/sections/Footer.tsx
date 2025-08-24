@@ -3,19 +3,19 @@ import ArrowUpRightIcon from "@/assets/icons/arrow-up-right.svg";
 const footerLinks = [
   {
     title: "Github",
-    href: "#",
+    href: "https://github.com/subhankar2004",
   },
   {
     title: "Twitter",
-    href: "#",
+    href: "https://x.com/SubhankarP1809",
   },
   {
     title: "Instagram",
-    href: "#",
+    href: "https://www.instagram.com/subhankar_patra22?igsh=MXJjemZ2c2x1MGcydA==",
   },
   {
     title: "LinkedIn",
-    href: "#",
+    href: "https://www.linkedin.com/in/subhankar-patra-400519291/",
   },
 ];
 
