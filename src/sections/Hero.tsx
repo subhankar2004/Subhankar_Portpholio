@@ -224,7 +224,7 @@ export const HeroSection = () => {
           <button
             onClick={handleExploreWork}
             type="button"
-            className="inline-flex items-center gap-2 border border-white/15 px-6 h-12 rounded-lg hover:bg-white/5 transition-colors cursor-pointer"
+            className="inline-flex items-center gap-2 border border-white/15 px-6 h-12 rounded-lg hover:bg-white/5 transition-colors cursor-pointer relative z-50"
           >
             <span className="font-semibold">Explore My Work</span>
             <ArrowDown className="size-4" />
@@ -234,7 +234,7 @@ export const HeroSection = () => {
           <button
             onClick={handleResumeClick}
             type="button"
-            className="inline-flex items-center gap-2 border border-white bg-white text-gray-900 px-6 h-12 rounded-xl hover:scale-105 active:scale-100 transition-transform cursor-pointer"
+            className="inline-flex items-center gap-2 border border-white bg-white text-gray-900 px-6 h-12 rounded-xl hover:scale-105 active:scale-100 transition-transform cursor-pointer relative z-50"
           >
             <Download className="size-6 text-red-900" />
             <span className="font-semibold">My Resume</span>
